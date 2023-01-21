@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<form action="/contact" method="post" class="form-contact">
+    <p><label>Имя: </label> <input type="text" name="username" value="" requied/>
+    <p><label>Email: </label> <input type="text" name="email" value="" requied/>
+    <p><label>Сообщение:</label>
+    <p><textarea name="message" rows=7 cols=40></textarea>
+    <p><input type="submit" value="Отправить"/>
+</form>
+{% endblock %}
+
+
+
+
+<!
+Они описываются на странице с помощью тега form,
+в параметре action указывается URL, который должен принимать данные от формы,
+а параметр method определяет способ передачи данных.
+В основном, используются два вида передачи:
+
+GET – в виде строки запроса: "/handler?name=Alex&old=18&profit=1000";
+POST – в виде бинарных данных (используется для передачи больших
+объемов данных: изображений, звуков, документов и т.п., а также
+закрытых сведений: паролей, логинов и т.п.).
+Добавим форму в шаблон contact.html:
+>

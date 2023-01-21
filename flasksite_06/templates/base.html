@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet"/>  <!добаляем css>
+    {% block title -%}
+    {% if title %}
+    <title>Про Flask - {{title}}</title>
+    {% else %}
+    <title>Про Flask</title>
+    {% endif %}
+    {% endblock %}
+</head>
+
+<body>
+{% block content -%}
+{%- block mainmenu -%}
+
+<ul class="mainmenu">   <!Чтобы таблицы стилей были применены к соответствующим элементам HTML-документа>
+    {% for m in menu -%}
+    <li><a href="{{m.url}}">{{m.name}}</a></li>  <!добаляем ссылки к нашему меню>
+    {% endfor -%}
+</ul>
+
+{% endblock mainmenu -%}
+<div class="clear"></div>   <!Чтобы таблицы стилей были применены к соответствующим элементам HTML-документа>
+<div class="content">   <!Чтобы таблицы стилей были применены к соответствующим элементам HTML-документа>
+{% if title -%}
+
+<h1>{{title}}</h1>
+{% else -%}
+<h1>Про Flask</h1>
+
+{% endif -%}
+{% endblock -%}
+</div>
+</body>
+</html>
