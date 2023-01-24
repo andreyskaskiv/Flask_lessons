@@ -1,11 +1,13 @@
 """Авторизация пользователей на сайте через Flask-Login"""
 
-import sqlite3
 import os
+import sqlite3
+
 from flask import Flask, render_template, request, g, flash, abort, redirect, url_for
-from FDataBase import FDataBase
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from FDataBase import FDataBase
 from UserLogin import UserLogin
 
 # конфигурация
@@ -90,7 +92,7 @@ def addPost():
 
 
 @app.route("/post/<alias>")
-@login_required
+@login_required  # сделаем так, чтобы статьи можно было просматривать только авторизованным пользователям
 def showPost(alias):
     title, post = dbase.getPost(alias)
     if not title:
@@ -136,7 +138,7 @@ def register():
 
 
 @app.route('/logout')
-@login_required
+@login_required  # сделаем так, чтобы статьи можно было просматривать только авторизованным пользователям
 def logout():
     logout_user()
     flash("Вы вышли из аккаунта", "success")
@@ -144,7 +146,7 @@ def logout():
 
 
 @app.route('/profile')
-@login_required
+@login_required  # сделаем так, чтобы статьи можно было просматривать только авторизованным пользователям
 def profile():
     return f"""<p><a href="{url_for('logout')}">Выйти из профиля</a>
                 <p>user info: {current_user.get_id()}"""
